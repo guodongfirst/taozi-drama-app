@@ -6,13 +6,22 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C5DF981271D830DD08FC8031 /* libPods-TaoziShortDrama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA7E02B92AEE278ABF13647 /* libPods-TaoziShortDrama.a */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		238DFC9BD4C0224A96DE0A97 /* Pods-TaoziShortDrama.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoziShortDrama.release.xcconfig"; path = "Target Support Files/Pods-TaoziShortDrama/Pods-TaoziShortDrama.release.xcconfig"; sourceTree = "<group>"; };
 		A10000000000000000000005 /* TaoziShortDrama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaoziShortDrama.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCA7E02B92AEE278ABF13647 /* libPods-TaoziShortDrama.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TaoziShortDrama.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0148CF5CC8CC20EED4BD735 /* Pods-TaoziShortDrama.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoziShortDrama.debug.xcconfig"; path = "Target Support Files/Pods-TaoziShortDrama/Pods-TaoziShortDrama.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A10000000000000000000004 /* TaoziShortDrama */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = TaoziShortDrama;
 			sourceTree = "<group>";
 		};
@@ -23,17 +32,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5DF981271D830DD08FC8031 /* libPods-TaoziShortDrama.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		606CAE34D304461CA6A891FD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F0148CF5CC8CC20EED4BD735 /* Pods-TaoziShortDrama.debug.xcconfig */,
+				238DFC9BD4C0224A96DE0A97 /* Pods-TaoziShortDrama.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A10000000000000000000002 = {
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000004 /* TaoziShortDrama */,
 				A10000000000000000000003 /* Products */,
+				606CAE34D304461CA6A891FD /* Pods */,
+				B1FE0C8F2B2683CB1D7B0E5B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -45,6 +67,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B1FE0C8F2B2683CB1D7B0E5B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CCA7E02B92AEE278ABF13647 /* libPods-TaoziShortDrama.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -52,9 +82,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1000000000000000000000B /* Build configuration list for PBXNativeTarget "TaoziShortDrama" */;
 			buildPhases = (
+				9B0476E2A44B97812841B1BC /* [CP] Check Pods Manifest.lock */,
 				A10000000000000000000007 /* Sources */,
 				A10000000000000000000008 /* Frameworks */,
 				A10000000000000000000009 /* Resources */,
+				EF8164E8CB126B4192EB4958 /* [CP] Embed Pods Frameworks */,
+				9FBAFA7780C867BED2DAE21B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -113,6 +146,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9B0476E2A44B97812841B1BC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TaoziShortDrama-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FBAFA7780C867BED2DAE21B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TaoziShortDrama/Pods-TaoziShortDrama-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TaoziShortDrama/Pods-TaoziShortDrama-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TaoziShortDrama/Pods-TaoziShortDrama-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF8164E8CB126B4192EB4958 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TaoziShortDrama/Pods-TaoziShortDrama-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TaoziShortDrama/Pods-TaoziShortDrama-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TaoziShortDrama/Pods-TaoziShortDrama-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A10000000000000000000007 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -161,7 +253,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -224,7 +316,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -245,6 +337,7 @@
 		};
 		A1000000000000000000000E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0148CF5CC8CC20EED4BD735 /* Pods-TaoziShortDrama.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -278,6 +371,7 @@
 		};
 		A1000000000000000000000F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 238DFC9BD4C0224A96DE0A97 /* Pods-TaoziShortDrama.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -98,19 +98,39 @@ struct LaunchView: View {
             progress = 0
             return
         }
+        SplashAd.shared.prepare()
+        let splash = Task { await waitForSplash() }
         let duration = 1.6
         let start = Date()
         while !Task.isCancelled {
             let value = min(Date().timeIntervalSince(start) / duration, 1)
             progress = value
             if value >= 1 {
-                didFinishLoading = true
-                return
+                break
             }
             do {
                 try await Task.sleep(for: .milliseconds(32))
             } catch {
                 return
+            }
+        }
+        guard !Task.isCancelled else { return }
+        SplashAd.shared.allowShowAfterBrand()
+        await splash.value
+        guard !Task.isCancelled else { return }
+        didFinishLoading = true
+    }
+
+    private func waitForSplash() async {
+        await withCheckedContinuation { continuation in
+            PangleAds.start { success in
+                guard success else {
+                    continuation.resume()
+                    return
+                }
+                SplashAd.shared.load {
+                    continuation.resume()
+                }
             }
         }
     }

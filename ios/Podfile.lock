@@ -1,0 +1,96 @@
+PODS:
+  - Ads-CN-Beta/BUAdLive (7.9.0.0)
+  - Ads-CN-Beta/BUAdLive-Framework (7.9.0.0):
+    - Ads-CN-Beta/BUAdLive
+    - BUTTSDKFramework/LivePull-Lite (= 1.48.2.3-premium)
+  - Ads-CN-Beta/BUAdSDK (7.9.0.0)
+  - Ads-CN-Beta/CSJMediation (7.9.0.0):
+    - Ads-CN-Beta/BUAdLive-Framework
+    - Ads-CN-Beta/CSJMediation-Only
+  - Ads-CN-Beta/CSJMediation-Only (7.9.0.0):
+    - Ads-CN-Beta/BUAdSDK
+  - BaiduMobAdSDK (10.060)
+  - BUTTSDKFramework/Core (1.48.2.3-premium)
+  - BUTTSDKFramework/LiveBase (1.48.2.3-premium):
+    - BUTTSDKFramework/Core
+    - BUTTSDKFramework/Reachability
+  - BUTTSDKFramework/LivePlayer/Base (1.48.2.3-premium):
+    - BUTTSDKFramework/Core
+    - BUTTSDKFramework/LiveBase
+    - BUTTSDKFramework/LivePull-VolcLog
+    - BUTTSDKFramework/Reachability
+  - BUTTSDKFramework/LivePlayer/Lite (1.48.2.3-premium):
+    - BUTTSDKFramework/LivePlayer/Base
+    - BUTTSDKFramework/PlayerCore/LiveLite
+  - BUTTSDKFramework/LivePull-Lite (1.48.2.3-premium):
+    - BUTTSDKFramework/LivePlayer/Lite
+    - BUTTSDKFramework/Strategy/Lite
+  - BUTTSDKFramework/LivePull-VolcLog (1.48.2.3-premium):
+    - BUTTSDKFramework/VolcLog
+  - BUTTSDKFramework/PlayerCore/Base (1.48.2.3-premium):
+    - BUTTSDKFramework/Core
+  - BUTTSDKFramework/PlayerCore/LiveLite (1.48.2.3-premium):
+    - BUTTSDKFramework/PlayerCore/Base
+    - BUTTSDKFramework/TTFFmpeg/LiveLite
+  - BUTTSDKFramework/Reachability (1.48.2.3-premium)
+  - BUTTSDKFramework/Strategy/Core (1.48.2.3-premium):
+    - BUTTSDKFramework/LiveBase
+    - BUTTSDKFramework/Reachability
+  - BUTTSDKFramework/Strategy/Lite (1.48.2.3-premium):
+    - BUTTSDKFramework/LivePlayer/Lite
+    - BUTTSDKFramework/Strategy/Core
+  - BUTTSDKFramework/TTFFmpeg/LiveLite (1.48.2.3-premium)
+  - BUTTSDKFramework/VolcLog (1.48.2.3-premium)
+  - GDTMobSDK (4.16.10)
+  - GMBaiduAdapter-Beta (10.060.0):
+    - Ads-CN-Beta/CSJMediation-Only (>= 7.8.0.5)
+  - GMGdtAdapter-Beta (4.16.10.0):
+    - Ads-CN-Beta/CSJMediation-Only (>= 7.8.0.5)
+  - GMKsAdapter-Beta (5.7.20.1.0):
+    - Ads-CN-Beta/CSJMediation-Only (>= 7.8.0.5)
+  - GMSigmobAdapter-Beta (5.1.4.0):
+    - Ads-CN-Beta/CSJMediation-Only (>= 7.8.0.5)
+  - KSAdSDK (5.7.20.1)
+  - SigmobAd-iOS (5.1.4):
+    - SigmobAd-iOS/WindSDK (= 5.1.4)
+  - SigmobAd-iOS/WindSDK (5.1.4)
+
+DEPENDENCIES:
+  - Ads-CN-Beta/CSJMediation (= 7.9.0.0)
+  - BaiduMobAdSDK (= 10.060)
+  - GDTMobSDK (= 4.16.10)
+  - GMBaiduAdapter-Beta (= 10.060.0)
+  - GMGdtAdapter-Beta (= 4.16.10.0)
+  - GMKsAdapter-Beta (= 5.7.20.1.0)
+  - GMSigmobAdapter-Beta (= 5.1.4.0)
+  - KSAdSDK (= 5.7.20.1)
+  - SigmobAd-iOS (= 5.1.4)
+
+SPEC REPOS:
+  trunk:
+    - Ads-CN-Beta
+    - BaiduMobAdSDK
+    - BUTTSDKFramework
+    - GDTMobSDK
+    - GMBaiduAdapter-Beta
+    - GMGdtAdapter-Beta
+    - GMKsAdapter-Beta
+    - GMSigmobAdapter-Beta
+    - KSAdSDK
+    - SigmobAd-iOS
+
+SPEC CHECKSUMS:
+  Ads-CN-Beta: f64b4b36cedda7ac3f37bee88124f66eff0cd227
+  BaiduMobAdSDK: b6df346e71e5c35ab3c7535d3a99891087ed2434
+  BUTTSDKFramework: 34f8f8d541da07e79e9c479eb71336d1e4d90fdd
+  GDTMobSDK: 21a1a8ceb1fc719e8c699557378a1cfaf135ec0f
+  GMBaiduAdapter-Beta: 319fc5cfc20b0aa25e8f7c0cf2974a7abfe8e889
+  GMGdtAdapter-Beta: 1fc736c565581e9409d99c84c650b285cedc3cf1
+  GMKsAdapter-Beta: e57dcf1ad990919125947cdc61b21763ced0ca77
+  GMSigmobAdapter-Beta: b5739cb384bd4ddb7ac52f13c061ba40ebf993c0
+  KSAdSDK: fe45a06124dbe83cfb2ef860769b583f3470b11c
+  SigmobAd-iOS: d38c04b74b674fabc926af735e5d2dbba856bd83
+
+PODFILE CHECKSUM: 58e6c8119250b483584cfa29ccf362f373ad1d01
+
+COCOAPODS: 1.16.2

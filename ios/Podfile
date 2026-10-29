@@ -1,0 +1,15 @@
+platform :ios, '18.0'
+
+target 'TaoziShortDrama' do
+  pod 'Ads-CN-Beta', '7.9.0.0', :subspecs => ['CSJMediation']
+  # 引入融合Adapters(推荐使用自动拉取adapter工具，此处无需引入)
+  pod 'GMGdtAdapter-Beta', '4.16.10.0'
+  pod 'GMBaiduAdapter-Beta', '10.060.0'
+  pod 'GMKsAdapter-Beta', '5.7.20.1.0'
+  pod 'GMSigmobAdapter-Beta', '5.1.4.0'
+  # 引入使用到的ADN SDK，开发者请按需引入
+  pod 'GDTMobSDK', '4.16.10'
+  pod 'BaiduMobAdSDK', '10.060'
+  pod 'KSAdSDK', '5.7.20.1'
+  pod 'SigmobAd-iOS', '5.1.4'
+end
