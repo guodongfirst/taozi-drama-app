@@ -17,7 +17,7 @@ struct ContentView: View {
                         .opacity(tab == .drama ? 1 : 0)
                         .allowsHitTesting(tab == .drama)
                     if tab == .task {
-                        MainTabPlaceholder(title: "任务")
+                        TaskCenterView(onWatchDrama: { tab = .drama })
                     } else if tab == .mine {
                         MainTabPlaceholder(title: "我的")
                     }
