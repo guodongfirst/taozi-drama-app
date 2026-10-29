@@ -82,13 +82,6 @@ struct MineView: View {
                         .foregroundStyle(Color.mineStone)
                         .padding(.trailing, 15)
                 }
-                if entry.showsDot {
-                    Image("mine-dot")
-                        .resizable()
-                        .frame(width: 7, height: 7)
-                        .padding(.trailing, 11)
-                        .accessibilityHidden(true)
-                }
                 Image("mine-chevron")
                     .resizable()
                     .frame(width: 5.8, height: 9.8)
@@ -108,7 +101,6 @@ private struct MineEntry: Identifiable {
     let icon: String
     let title: String
     var detail: String?
-    var showsDot = false
     var id: String { title }
 }
 
@@ -116,7 +108,6 @@ private let mineEntries = [
     MineEntry(icon: "mine-preference", title: "看剧偏好", detail: "女频"),
     MineEntry(icon: "mine-record", title: "追剧记录"),
     MineEntry(icon: "mine-watch", title: "看剧设置"),
-    MineEntry(icon: "mine-recommend", title: "应用推荐", showsDot: true),
     MineEntry(icon: "mine-feedback", title: "意见反馈"),
     MineEntry(icon: "mine-faq", title: "常见问题")
 ]
