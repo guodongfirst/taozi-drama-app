@@ -25,7 +25,7 @@ enum TaoziFont {
             if latin {
                 piece.font = style.map { .custom("DINCondensed-Bold", size: size, relativeTo: $0) }
                     ?? .custom("DINCondensed-Bold", size: size)
-                piece.tracking = size * 0.16
+                piece.tracking = size * 0.06
             } else if let style {
                 piece.font = .system(style).weight(weight)
             } else {
