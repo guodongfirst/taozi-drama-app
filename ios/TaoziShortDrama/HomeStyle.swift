@@ -11,6 +11,8 @@ extension Color {
     static let homeLine = Color(red: 232 / 255, green: 227 / 255, blue: 222 / 255)
     static let homeFresh = Color(red: 41 / 255, green: 176 / 255, blue: 102 / 255)
     static let homeEpisode = Color(red: 79 / 255, green: 51 / 255, blue: 43 / 255).opacity(0.42)
+    static let homeContinueStone = Color(red: 125 / 255, green: 117 / 255, blue: 112 / 255)
+    static let homeContinueShadow = Color(red: 87 / 255, green: 51 / 255, blue: 43 / 255).opacity(0.13)
     static let taskInk = Color(red: 38 / 255, green: 31 / 255, blue: 28 / 255)
     static let taskStone = Color(red: 143 / 255, green: 135 / 255, blue: 130 / 255)
     static let taskAccent = Color(red: 255 / 255, green: 74 / 255, blue: 69 / 255)

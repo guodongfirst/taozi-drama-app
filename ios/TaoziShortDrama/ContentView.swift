@@ -8,12 +8,13 @@ enum MainTab {
 
 struct ContentView: View {
     @State private var tab = MainTab.drama
+    @State private var homeRefresh = 0
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 ZStack {
-                    HomeView()
+                    HomeView(refreshTick: homeRefresh)
                         .opacity(tab == .drama ? 1 : 0)
                         .allowsHitTesting(tab == .drama)
                     if tab == .task {
@@ -31,6 +32,7 @@ struct ContentView: View {
                 DramaPlayerView(route: route)
                     .toolbar(.hidden, for: .navigationBar)
                     .ignoresSafeArea()
+                    .onDisappear { homeRefresh += 1 }
             }
         }
         .preferredColorScheme(.light)

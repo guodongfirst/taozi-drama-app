@@ -12,6 +12,7 @@ alwaysApply: true
 - 只导出 **2 倍图** 和 **3 倍图**，不要 1 倍图
 - 放进 `ios/TaoziShortDrama/Assets.xcassets/`，用 imageset 的 `2x` / `3x`
 - 界面里用 `Image("资源名")` 引用
+- **图标切图不要背景。** 只保留图标本身，其余区域透明。不要带上父级卡片、页面底色、白色底板或点击热区的填充。导出后确认 PNG 带 alpha，四角 alpha 为 0。背景、插画和需要铺底色的图不受这条限制。
 
 ```swift
 Image("play")

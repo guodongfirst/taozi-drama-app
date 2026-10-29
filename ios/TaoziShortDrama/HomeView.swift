@@ -3,6 +3,8 @@ import UIKit
 
 struct HomeView: View {
     var catalog: any DramaCatalog = PangleDramaCatalog.shared
+    var refreshTick = 0
+    var previewContinue: ContinueWatchingItem? = nil
 
     @State private var categories: [DramaCategory] = []
     @State private var categoryID = DramaFeed.recommendID
@@ -17,6 +19,8 @@ struct HomeView: View {
     @State private var pageFailed = false
     @State private var requestID = 0
     @State private var watchedTick = 0
+    @State private var continueItem: ContinueWatchingItem?
+    @State private var previewDismissed = false
 
     private var selectedTag: String {
         selectedTags[categoryID] ?? "全部"
@@ -34,6 +38,13 @@ struct HomeView: View {
         categories.first { $0.id == categoryID }
     }
 
+    private var continueEntry: ContinueWatchingItem? {
+        if previewContinue != nil {
+            return previewDismissed ? nil : previewContinue
+        }
+        return continueItem
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             categoryBar
@@ -46,7 +57,26 @@ struct HomeView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color.homeBackground)
-        .onAppear { watchedTick += 1 }
+        .overlay(alignment: .bottom) {
+            if let continueEntry {
+                ContinueWatchingBar(
+                    item: continueEntry,
+                    onClose: closeContinue
+                )
+                .padding(.horizontal, 10)
+                .padding(.bottom, 8)
+            }
+        }
+        .onAppear {
+            watchedTick += 1
+            reloadContinue()
+        }
+        .onChange(of: refreshTick) { _, _ in
+            reloadContinue()
+        }
+        .task(id: refreshTick) {
+            await refreshContinue()
+        }
         .task(id: feedKey) {
             await loadIfNeeded()
         }
@@ -157,7 +187,7 @@ struct HomeView: View {
                 .padding(.horizontal, 15)
                 footer
                     .padding(.top, 16)
-                    .padding(.bottom, 12)
+                    .padding(.bottom, continueEntry == nil ? 12 : 98)
             }
             .id(feedKey)
             .scrollPosition(id: anchorBinding, anchor: .top)
@@ -221,6 +251,28 @@ struct HomeView: View {
                 .foregroundStyle(Color.accentColor)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func reloadContinue() {
+        guard previewContinue == nil else { return }
+        continueItem = ContinueWatching.current()
+    }
+
+    private func refreshContinue() async {
+        guard previewContinue == nil else { return }
+        guard let remote = await catalog.latestContinueWatching() else { return }
+        if ContinueWatching.adopt(remote) {
+            continueItem = ContinueWatching.current()
+        }
+    }
+
+    private func closeContinue() {
+        if previewContinue != nil {
+            previewDismissed = true
+            return
+        }
+        ContinueWatching.dismiss()
+        continueItem = nil
     }
 
     private func loadIfNeeded() async {
@@ -392,9 +444,102 @@ private struct DramaCoverImage: View {
     }
 }
 
+private struct ContinueWatchingBar: View {
+    let item: ContinueWatchingItem
+    let onClose: () -> Void
+
+    var body: some View {
+        NavigationLink(value: DramaRoute(
+            id: item.id,
+            title: item.title,
+            episodeCount: item.episodeCount,
+            episode: item.resumeEpisode,
+            startTime: item.resumeTime
+        )) {
+            HStack(alignment: .top, spacing: 12) {
+                cover
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(item.title)
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundStyle(Color.mineInk)
+                        .lineLimit(1)
+                        .frame(height: 19, alignment: .leading)
+                    (Text("上次看到第 ")
+                        .font(.system(size: 10.5, weight: .bold))
+                    + Text("\(item.episode)")
+                        .font(.system(size: 10.5, weight: .semibold).width(.condensed))
+                    + Text(" 集")
+                        .font(.system(size: 10.5, weight: .bold)))
+                        .foregroundStyle(Color.homeContinueStone)
+                        .lineLimit(1)
+                        .frame(height: 15, alignment: .leading)
+                }
+                .padding(.top, 10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                Text("继续观看")
+                    .font(.system(size: 11.5, weight: .bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 84, height: 36)
+                    .background(Color.homeTabOn, in: RoundedRectangle(cornerRadius: 11))
+                    .padding(.top, 11)
+            }
+            .padding(.leading, 10)
+            .padding(.trailing, 16)
+            .padding(.top, 10)
+            .frame(maxWidth: .infinity, alignment: .top)
+            .frame(height: 78)
+            .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
+        }
+        .buttonStyle(.plain)
+        .shadow(color: Color.homeContinueShadow, radius: 7, y: 5)
+        .overlay(alignment: .topTrailing) {
+            Button(action: onClose) {
+                Image("continue-close")
+                    .resizable()
+                    .frame(width: 44, height: 44)
+                    .accessibilityHidden(true)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("关闭")
+        }
+        .accessibilityLabel("继续观看\(item.title)，上次看到第\(item.episode)集")
+    }
+
+    private var cover: some View {
+        Color.homeChipOff
+            .overlay {
+                DramaCoverImage(url: item.coverURL)
+            }
+            .overlay(alignment: .bottom) {
+                ZStack(alignment: .leading) {
+                    Rectangle()
+                        .fill(Color.white.opacity(0.38))
+                    Rectangle()
+                        .fill(Color.homeTabOn)
+                        .frame(width: 58 * min(max(item.progress, 0), 1))
+                }
+                .frame(height: 3)
+            }
+            .frame(width: 58, height: 58)
+            .clipShape(RoundedRectangle(cornerRadius: 11))
+    }
+}
+
 #Preview {
     NavigationStack {
-        HomeView(catalog: PreviewDramaCatalog())
+        HomeView(
+            catalog: PreviewDramaCatalog(),
+            previewContinue: ContinueWatchingItem(
+                id: 1,
+                title: "春风替我告白",
+                coverURL: nil,
+                episode: 18,
+                episodeCount: 81,
+                progress: 34 / 58,
+                duration: 0,
+                updatedAt: 0
+            )
+        )
     }
 }
 

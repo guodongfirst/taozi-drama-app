@@ -12,6 +12,11 @@ protocol DramaCatalog {
     func categories() async throws -> [DramaCategory]
     func dramas(categoryID: String, tag: String?, page: Int) async throws -> DramaPage
     func trackImpression(_ id: Int64)
+    func latestContinueWatching() async -> ContinueWatchingItem?
+}
+
+extension DramaCatalog {
+    func latestContinueWatching() async -> ContinueWatchingItem? { nil }
 }
 
 enum DramaFeed {

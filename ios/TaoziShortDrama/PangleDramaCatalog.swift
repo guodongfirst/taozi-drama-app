@@ -31,6 +31,21 @@ final class PangleDramaCatalog: DramaCatalog {
         models[id]
     }
 
+    func latestContinueWatching() async -> ContinueWatchingItem? {
+        do {
+            try await ready()
+        } catch {
+            return nil
+        }
+        return await withCheckedContinuation { continuation in
+            DJXPlayletManager.shareInstance().requestPlayletHistoryList(withPage: 1, num: 20) { [weak self] list in
+                continuation.resume(returning: self?.continueItem(list))
+            } failure: { _ in
+                continuation.resume(returning: nil)
+            }
+        }
+    }
+
     private func ready() async throws {
         let started = await withCheckedContinuation { continuation in
             PangleContent.whenReady { success in
@@ -119,6 +134,32 @@ final class PangleDramaCatalog: DramaCatalog {
             return number.boolValue
         }
         return count >= pageSize
+    }
+
+    private func continueItem(_ list: [DJXPlayletInfoModel]?) -> ContinueWatchingItem? {
+        guard let model = list?.max(by: { Self.watchedAt($0) < Self.watchedAt($1) }) else { return nil }
+        let id = Int64(model.shortplay_id)
+        let updatedAt = Self.watchedAt(model)
+        guard id > 0, model.current_episode > 0, updatedAt > 0 else { return nil }
+        models[id] = model
+        return ContinueWatchingItem(
+            id: id,
+            title: model.title,
+            coverURL: URL(string: model.cover_image),
+            episode: Int(model.current_episode),
+            episodeCount: model.total > 0 ? Int(model.total) : 0,
+            progress: 0,
+            duration: model.video_duration > 0 ? Double(model.video_duration) : 0,
+            updatedAt: updatedAt
+        )
+    }
+
+    private static func watchedAt(_ model: DJXPlayletInfoModel) -> TimeInterval {
+        let time = TimeInterval(model.action_time)
+        if time > 10_000_000_000 {
+            return time / 1000
+        }
+        return time
     }
 
     private static func corner(_ model: DJXPlayletInfoModel) -> DramaCorner? {
