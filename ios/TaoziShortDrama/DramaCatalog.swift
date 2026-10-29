@@ -10,7 +10,8 @@ enum DramaCatalogError: LocalizedError {
 
 protocol DramaCatalog {
     func categories() async throws -> [DramaCategory]
-    func dramas(categoryID: String, tag: String?) async throws -> [DramaSummary]
+    func dramas(categoryID: String, tag: String?, page: Int) async throws -> DramaPage
+    func trackImpression(_ id: Int64)
 }
 
 enum DramaFeed {

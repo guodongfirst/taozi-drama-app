@@ -1,0 +1,73 @@
+{
+	"init": {
+		"site_id": "5857460",
+		"app_id": "1078257",
+		"partner": "pangle_1078257",
+		"secure_key": "1c901af1871d768e4c9b1ad58ec15b8a",
+		"secure_key_d": "5436b7ad71a80b013234d450bd708b64"
+	},
+	"feed": {
+		"news_list_ad_code_id": "",
+		"news_first_ad_code_id": "",
+		"news_second_ad_code_id": "",
+		"video_first_ad_code_id": "",
+		"video_second_ad_code_id": "",
+		"related_ad_code_id": "",
+		"news_draw_ad_code_id": "992285748",
+		"news_draw_native_ad_code_id": "992285731",
+		"news_outer_list_ad_code_id": "",
+		"news_outer_first_ad_code_id": "",
+		"news_outer_second_ad_code_id": "",
+		"outer_video_second_ad_code_id": "",
+		"outer_related_ad_code_id": "",
+		"news_outer_draw_ad_code_id": "992285724",
+		"news_outer_draw_native_ad_code_id": "992285729",
+		"news_interstitial_code_id": ""
+	},
+	"small_video": {
+		"draw_ad_code_id": "992285746",
+		"draw_native_ad_code_id": "992285738",
+		"grid_ad_code_id": "992285726",
+		"grid_draw_ad_code_id": "992285730",
+		"grid_draw_native_ad_code_id": "992285741",
+		"video_card_ad_code_id": "992285737",
+		"video_card_draw_ad_code_id": "992285735",
+		"video_card_draw_native_ad_code_id": "992285745",
+		"interstitial_ad_code_id": "",
+		"interstitial_note_ad_code_id": "992285747",
+		"staggered_grid_ad_code_id": "992285742",
+		"staggered_grid_draw_ad_code_id": "992285746",
+		"staggered_grid_draw_native_ad_code_id": "992285738",
+		"draw_interstitial_ad_code_id": "992285744",
+		"draw_fullscreen_interstitial_ad_code_id": "992285725",
+		"draw_banner_code_id": "992285739",
+		"drama_rewarded_ad_code_id": "992285743",
+		"drama_rewarded_ad_code_id_02": "992285732",
+		"drama_draw_ad_code_id": "992285733",
+		"staggered_grid_ad_code_id_02": "992285727"
+	},
+	"novel": {
+		"status": 0,
+		"pre_ad_code_id": "",
+		"mid_ad_code_id": "",
+		"exciting_ad_code_id": "",
+		"interstitial_code_id": "",
+		"banner_ad_code_id": "",
+		"end_ad_code_id": ""
+	},
+	"live": null,
+	"license_config": [
+		{
+			"PackageName": "com.cn.coach.ios",
+			"BundleId": "com.cn.coach.ios",
+			"StartTime": "20261029T100710Z",
+			"ExpireTime": "20281028T100710Z",
+			"CreatedTime": "20261029T100709Z",
+			"Signature": "Snxk3L7JIv5m18v3q4UKcNj4wj3eX8GUz6AdymVxqULCvrELIe2ciG0ojTZsXWJ1L0DeuURN9XCjhkXs0uKzOB7lp9rkGU1wEUGKQLyuxvSRf3JrBKatIrW8yqpuTYMvwvAsyrCP6xct3hOm72BDK99qtPZCBLn1pPGTl2mzCstJXqfcq0UFaSeKZzXpup8MqU53D1Ebzb/96KG4jyqkL639v5rL7lf+rjG4C7AN9wlB0kZ/fE1ZsksV1c/15HoFiBvFH8Nc1xoD+jNcROxIG6TZdDdqPSGmvn1yRA03QMuI/U2jGIGgmJdss/ZMSRvzAHdr0b5/wchzZ34dsBdWsQ==",
+			"Content": "eyJJZCI6Ijk1MDg0MTE2NTAiLCJWZXJzaW9uIjoyLCJDaGFubmVsIjoiYWRfY3NqIiwiVHlwZSI6MiwiUGFja2FnZU5hbWUiOiJjb20uY24uY29hY2guaW9zIiwiQnVuZGxlSWQiOiJjb20uY24uY29hY2guaW9zIiwiTW9kdWxlcyI6W3siTmFtZSI6InZvZF9wbGF5IiwiRWRpdGlvbiI6InByZW1pdW1fZWRpdGlvbiIsIlN0YXJ0VGltZSI6MTc5MzI2ODQyOTUzMSwiRXhwaXJlVGltZSI6MTg1NjM0MDQyOTUzMSwiRXhwaXJlQnVmZmVyIjoxNTU1MjAwMDAwMH1dLCJGaWxlVmVyc2lvbiI6IjE3OTMyNjg0Mjk1NzAyMDYzODEifQ==",
+			"MainURL": "https://vod-license-m.volccdn.com/vod-license/l-9508411650-ch-ad_csj-a-1078257.lic?lk3s=0d9f7a7d&x-expires=4946868429&x-signature=ZDO1qdZzU7FZ8RWbRDSum7ZetYI%3D",
+			"BackupURL": "https://vod-license-b.volccdn.com/vod-license/l-9508411650-ch-ad_csj-a-1078257.lic?lk3s=0d9f7a7d&x-expires=4946868429&x-signature=GSYSqk2uEtdlrz2MXlxEy56NQW8%3D",
+			"Id": "9508411650"
+		}
+	]
+}

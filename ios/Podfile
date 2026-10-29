@@ -1,7 +1,13 @@
+source 'https://cdn.cocoapods.org/'
+source 'https://github.com/volcengine/volcengine-specs.git'
+source 'https://github.com/bytedance/cocoapods_sdk_source_repo.git'
+
 platform :ios, '18.0'
 
 target 'TaoziShortDrama' do
-  pod 'Ads-CN-Beta', '7.9.0.0', :subspecs => ['CSJMediation']
+  pod 'Ads-CN-Beta', '7.9.0.0', :subspecs => ['CSJMediation-Only']
+  pod 'PangrowthX', '2.9.0.6', :subspecs => ['shortplay-beta']
+  pod 'TTSDKFramework', '1.48.2.3-premium', :subspecs => ['Player-SR']
   # 引入融合Adapters(推荐使用自动拉取adapter工具，此处无需引入)
   pod 'GMGdtAdapter-Beta', '4.16.10.0'
   pod 'GMBaiduAdapter-Beta', '10.060.0'

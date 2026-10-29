@@ -26,9 +26,15 @@ struct DramaSummary: Identifiable, Hashable {
     let categoryID: String
 }
 
+struct DramaPage {
+    let items: [DramaSummary]
+    let hasMore: Bool
+}
+
 struct DramaRoute: Hashable {
     let id: Int64
     let title: String
+    let episodeCount: Int
 }
 
 enum WatchedDramas {

@@ -45,7 +45,6 @@
 				F0148CF5CC8CC20EED4BD735 /* Pods-TaoziShortDrama.debug.xcconfig */,
 				238DFC9BD4C0224A96DE0A97 /* Pods-TaoziShortDrama.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

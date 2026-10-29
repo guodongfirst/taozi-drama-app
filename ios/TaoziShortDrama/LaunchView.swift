@@ -128,8 +128,10 @@ struct LaunchView: View {
                     continuation.resume()
                     return
                 }
-                SplashAd.shared.load {
-                    continuation.resume()
+                PangleContent.start { _ in
+                    SplashAd.shared.load {
+                        continuation.resume()
+                    }
                 }
             }
         }
