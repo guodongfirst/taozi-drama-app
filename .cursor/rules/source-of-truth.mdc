@@ -1,0 +1,40 @@
+---
+description: 需求与设计只以最新 PRD、设计稿、品牌基础稿为准
+alwaysApply: true
+---
+
+# 需求与设计来源
+
+在用户明确新增来源之前，只看下面三份。不要用其他文档、旧结论或未写入这三份的内容做依据。
+
+用户会把变更同步进这三份。每次调整功能或界面之前，先重新拉取最新内容，再动手。
+
+## 1. PRD
+
+https://my.feishu.cn/wiki/DytcwUwiWi5DmpksqY9cN7ATnab
+
+用 lark-doc 读取该知识库文档的最新正文。功能、流程和文案以 PRD 为准。
+
+```bash
+lark-cli docs +fetch --as user --doc "https://my.feishu.cn/wiki/DytcwUwiWi5DmpksqY9cN7ATnab"
+```
+
+## 2. 设计稿
+
+https://www.figma.com/design/iTtk8RHaIVmfFYlqMJynQh/%E6%A1%83%E5%AD%90%E5%B0%8F%E5%89%A7?node-id=6-2
+
+- fileKey：`iTtk8RHaIVmfFYlqMJynQh`
+- nodeId：`6:2`
+
+页面结构、布局和交互以这份设计稿为准。
+
+## 3. 品牌基础设计稿
+
+https://www.figma.com/design/iTtk8RHaIVmfFYlqMJynQh/%E6%A1%83%E5%AD%90%E5%B0%8F%E5%89%A7?node-id=0-1
+
+- fileKey：`iTtk8RHaIVmfFYlqMJynQh`
+- nodeId：`0:1`
+
+色彩、字体、图标等品牌基础以这份为准。
+
+三份不一致时，先说明冲突，再按用户当次指定处理。不要自行用旧版本补齐。

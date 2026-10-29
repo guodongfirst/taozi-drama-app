@@ -1,0 +1,43 @@
+---
+description: 桃子小剧界面还原约定：切图、新页面入栈、黑色状态栏
+alwaysApply: true
+---
+
+# 界面还原
+
+## 1. 图标和背景用切图
+
+按 Figma 还原时，图标和背景直接从设计稿切图，不要用代码绘制、手写 SVG、SF Symbols 或生成图代替。
+
+- 只导出 **2 倍图** 和 **3 倍图**，不要 1 倍图
+- 放进 `ios/TaoziShortDrama/Assets.xcassets/`，用 imageset 的 `2x` / `3x`
+- 界面里用 `Image("资源名")` 引用
+
+```swift
+Image("play")
+```
+
+## 2. 新页面进入新栈
+
+跳转新页面一律压入导航栈，返回逐层回到上一页。
+
+- 根容器用 `NavigationStack`
+- 打开新页面用 `NavigationLink` 或 `navigationDestination` 入栈
+- 不要用 `sheet`、`fullScreenCover`，也不要替换整个 `NavigationPath` 来跳页
+
+```swift
+NavigationLink(value: PlayerRoute(id: id)) {
+    Text("播放")
+}
+.navigationDestination(for: PlayerRoute.self) { route in
+    PlayerView(id: route.id)
+}
+```
+
+## 3. 状态栏用黑色
+
+状态栏图标和文字使用黑色（`UIStatusBarStyleDarkContent`），不要用浅色状态栏。新页面不要改成浅色内容。
+
+```swift
+.preferredColorScheme(.light)
+```
