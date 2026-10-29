@@ -76,8 +76,7 @@ private struct MainTabBar: View {
                                 .accessibilityHidden(true)
                         }
                     }
-                Text(title)
-                    .font(.caption2.weight(.bold))
+                TaoziFont.text(title, style: .caption2, weight: .bold)
                     .foregroundStyle(selected ? Color.homeTabOn : Color.homeTab)
             }
             .frame(maxWidth: .infinity)

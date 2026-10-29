@@ -40,8 +40,7 @@ struct MineView: View {
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 9) {
                 HStack(spacing: 4) {
-                    Text("桃桃剧迷")
-                        .font(.system(size: 20, weight: .bold))
+                    TaoziFont.text("桃桃剧迷", size: 20, weight: .bold)
                         .foregroundStyle(Color.mineInk)
                         .lineLimit(1)
                     Spacer(minLength: 8)
@@ -51,16 +50,13 @@ struct MineView: View {
                                 .resizable()
                                 .frame(width: 16, height: 16)
                                 .accessibilityHidden(true)
-                            Text("设置")
-                                .font(.footnote.weight(.bold))
+                            TaoziFont.text("设置", style: .footnote, weight: .bold)
                         }
                         .foregroundStyle(Color.mineInk)
                     }
                     .buttonStyle(.plain)
                 }
-                Text("ID: 8PQY5A8D883")
-                    .font(.system(size: 11, weight: .semibold))
-                    .fontWidth(.condensed)
+                TaoziFont.text("ID: 8PQY5A8D883", size: 11, weight: .semibold)
                     .foregroundStyle(Color.mineStone)
                     .lineLimit(1)
             }
@@ -77,14 +73,12 @@ struct MineView: View {
                     .resizable()
                     .frame(width: 18, height: 18)
                     .accessibilityHidden(true)
-                Text(entry.title)
-                    .font(.subheadline.weight(.bold))
+                TaoziFont.text(entry.title, style: .subheadline, weight: .bold)
                     .foregroundStyle(Color.mineInk)
                     .padding(.leading, 12)
                 Spacer(minLength: 8)
                 if let detail = entry.detail {
-                    Text(detail)
-                        .font(.footnote.weight(.bold))
+                    TaoziFont.text(detail, style: .footnote, weight: .bold)
                         .foregroundStyle(Color.mineStone)
                         .padding(.trailing, 15)
                 }

@@ -68,12 +68,10 @@ struct LaunchView: View {
 
     private var loadingStatus: some View {
         VStack(spacing: 0) {
-            Text("正在为你准备今日好剧")
-                .font(.caption.weight(.bold))
+            TaoziFont.text("正在为你准备今日好剧", style: .caption, weight: .bold)
             loadingBar
                 .padding(.top, 8)
-            Text("\(Int((progress * 100).rounded()))%")
-                .font(.caption2.weight(.semibold))
+            TaoziFont.text("\(Int((progress * 100).rounded()))%", style: .caption2, weight: .semibold)
                 .padding(.top, 7)
         }
         .opacity(needsConsent ? 0 : 1)

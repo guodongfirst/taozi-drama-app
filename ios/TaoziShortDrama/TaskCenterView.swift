@@ -5,8 +5,7 @@ struct TaskCenterView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Text("任务中心")
-                .font(.callout.weight(.bold))
+            TaoziFont.text("任务中心", style: .callout, weight: .bold)
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 44)
@@ -38,30 +37,23 @@ struct TaskCenterView: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .bottom, spacing: 0) {
                 balanceColumn(title: "金币余额") {
-                    Text("3500")
-                        .font(.system(size: 28, weight: .semibold))
-                        .fontWidth(.condensed)
+                    TaoziFont.text("3500", size: 28, weight: .semibold)
                 }
                 balanceColumn(title: "现金余额") {
-                    Text("0.71")
-                        .font(.system(size: 28, weight: .semibold))
-                        .fontWidth(.condensed)
-                    + Text("元")
-                        .font(.caption2.weight(.bold))
+                    TaoziFont.text("0.71", size: 28, weight: .semibold)
+                    + TaoziFont.text("元", style: .caption2, weight: .bold)
                 }
             }
             .overlay(alignment: .bottomTrailing) {
                 Button(action: {}) {
-                    Text("提现")
-                        .font(.caption.weight(.bold))
+                    TaoziFont.text("提现", style: .caption, weight: .bold)
                         .foregroundStyle(.white)
                         .frame(width: 58, height: 32)
                         .background(Color.taskAccent, in: RoundedRectangle(cornerRadius: 9))
                 }
                 .buttonStyle(.plain)
             }
-            Text("每天凌晨自动兑换成现金")
-                .font(.system(size: 10, weight: .bold))
+            TaoziFont.text("每天凌晨自动兑换成现金", size: 10, weight: .bold)
                 .foregroundStyle(Color.taskStone)
         }
         .padding(.horizontal, 14)
@@ -73,8 +65,7 @@ struct TaskCenterView: View {
 
     private func balanceColumn(title: String, @ViewBuilder value: () -> Text) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.caption.weight(.bold))
+            TaoziFont.text(title, style: .caption, weight: .bold)
                 .foregroundStyle(Color.taskInk)
             value()
                 .foregroundStyle(Color.taskAccent)
@@ -90,28 +81,21 @@ struct TaskCenterView: View {
                     .resizable()
                     .frame(width: 20, height: 20)
                     .accessibilityHidden(true)
-                Text("每日任务")
-                    .font(.callout.weight(.bold))
+                TaoziFont.text("每日任务", style: .callout, weight: .bold)
                     .foregroundStyle(Color.taskAccent)
             }
             .padding(.top, 10)
             .padding(.bottom, 12)
 
             taskRow(title: "签到", coins: 8300, button: "已完成", active: false) {
-                Text("签到领金币，看短剧可获得额外奖励")
-                    .font(.system(size: 10, weight: .bold))
+                TaoziFont.text("签到领金币，看短剧可获得额外奖励", size: 10, weight: .bold)
             }
 
             taskDivider
                 .padding(.top, 10)
 
             taskRow(title: "看剧得奖励", coins: 146420, button: "去看剧", active: true, action: onWatchDrama) {
-                Text("今日已观看：")
-                    .font(.system(size: 10, weight: .bold))
-                + Text("0")
-                    .font(.system(size: 10, weight: .semibold).width(.condensed))
-                + Text("集")
-                    .font(.system(size: 10, weight: .bold))
+                TaoziFont.text("今日已观看：0集", size: 10, weight: .bold)
             }
             .padding(.top, 14)
 
@@ -122,8 +106,7 @@ struct TaskCenterView: View {
                 .padding(.top, 10)
 
             taskRow(title: "看视频领金币", coins: nil, button: "去观看", active: true, action: {}) {
-                Text("观看视频即可获得金币")
-                    .font(.system(size: 10, weight: .bold))
+                TaoziFont.text("观看视频即可获得金币", size: 10, weight: .bold)
             }
             .padding(.top, 14)
 
@@ -134,10 +117,7 @@ struct TaskCenterView: View {
                 .padding(.top, 18)
 
             taskRow(title: "饭点看剧奖励", coins: 500, button: "去看剧", active: true, action: onWatchDrama) {
-                Text("17:00")
-                    .font(.system(size: 10, weight: .semibold).width(.condensed))
-                + Text("可领取晚间补贴，先去看剧吧")
-                    .font(.system(size: 10, weight: .bold))
+                TaoziFont.text("17:00可领取晚间补贴，先去看剧吧", size: 10, weight: .bold)
             }
             .padding(.top, 14)
         }
@@ -157,9 +137,7 @@ struct TaskCenterView: View {
                             .frame(width: 20, height: 20)
                             .accessibilityHidden(true)
                             .padding(.top, 8)
-                        Text("+\(reward.coins)")
-                            .font(.caption.weight(.semibold))
-                            .fontWidth(.condensed)
+                        TaoziFont.text("+\(reward.coins)", style: .caption, weight: .semibold)
                             .foregroundStyle(.white)
                         Spacer(minLength: 0)
                     }
@@ -169,10 +147,7 @@ struct TaskCenterView: View {
                             .resizable()
                             .accessibilityHidden(true)
                     }
-                    (Text("\(reward.episodes)")
-                        .font(.system(size: 9, weight: .semibold).width(.condensed))
-                    + Text("集")
-                        .font(.system(size: 9, weight: .bold)))
+                    TaoziFont.text("\(reward.episodes)集", size: 9, weight: .bold)
                     .foregroundStyle(Color.taskStone)
                 }
             }
@@ -190,14 +165,7 @@ struct TaskCenterView: View {
                         .fill(Color.taskAccent)
                         .frame(width: 2, height: 5)
                 }
-            (Text("0")
-                .font(.system(size: 9, weight: .semibold).width(.condensed))
-            + Text("/")
-                .font(.system(size: 9, weight: .bold))
-            + Text("5")
-                .font(.system(size: 9, weight: .semibold).width(.condensed))
-            + Text("次")
-                .font(.system(size: 9, weight: .bold)))
+            TaoziFont.text("0/5次", size: 9, weight: .bold)
             .foregroundStyle(Color.taskStone)
         }
     }
@@ -213,8 +181,7 @@ struct TaskCenterView: View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 0) {
                 HStack(spacing: 4) {
-                    Text(title)
-                        .font(.footnote.weight(.bold))
+                    TaoziFont.text(title, style: .footnote, weight: .bold)
                         .foregroundStyle(Color.taskInk)
                         .padding(.trailing, 12)
                     if let coins {
@@ -222,9 +189,7 @@ struct TaskCenterView: View {
                             .resizable()
                             .frame(width: 16, height: 16)
                             .accessibilityHidden(true)
-                        Text("\(coins)")
-                            .font(.footnote.weight(.semibold))
-                            .fontWidth(.condensed)
+                        TaoziFont.text("\(coins)", style: .footnote, weight: .semibold)
                             .foregroundStyle(Color.taskAccent)
                     }
                 }
@@ -239,8 +204,7 @@ struct TaskCenterView: View {
 
     @ViewBuilder
     private func taskButton(_ title: String, active: Bool, action: (() -> Void)?) -> some View {
-        let label = Text(title)
-            .font(.system(size: 10, weight: .bold))
+        let label = TaoziFont.text(title, size: 10, weight: .bold)
             .foregroundStyle(active ? Color.taskAccent : Color.taskStone)
             .frame(width: 60, height: 28)
             .background(active ? Color.taskAction : Color.homeChipOff, in: RoundedRectangle(cornerRadius: 9))

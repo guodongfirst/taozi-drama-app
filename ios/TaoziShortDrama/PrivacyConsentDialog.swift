@@ -17,13 +17,11 @@ struct PrivacyConsentDialog: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Text("个人信息保护指引")
-                .font(.system(size: 21, weight: .bold))
+            TaoziFont.text("个人信息保护指引", size: 21, weight: .bold)
                 .foregroundStyle(Color.consentInk)
                 .padding(.top, 25)
 
-            Text("我们非常重视你的个人信息安全，请充分阅读并理解后，点击下方按钮接受我们的服务：")
-                .font(.system(size: 14, weight: .bold))
+            TaoziFont.text("我们非常重视你的个人信息安全，请充分阅读并理解后，点击下方按钮接受我们的服务：", size: 14, weight: .bold)
                 .foregroundStyle(Color.consentInk)
                 .lineSpacing(4)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -35,8 +33,7 @@ struct PrivacyConsentDialog: View {
                 .padding(.horizontal, 24)
 
             Button(action: onAgree) {
-                Text("我已阅读并同意")
-                    .font(.callout.weight(.bold))
+                TaoziFont.text("我已阅读并同意", style: .callout, weight: .bold)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 46)
@@ -48,8 +45,7 @@ struct PrivacyConsentDialog: View {
 
             Button(action: onDisagree) {
                 VStack(spacing: 4) {
-                    Text("不同意")
-                        .font(.system(size: 14, weight: .bold))
+                    TaoziFont.text("不同意", size: 14, weight: .bold)
                         .foregroundStyle(Color.consentStone)
                     Rectangle()
                         .fill(Color.consentStone.opacity(0.45))
@@ -85,20 +81,19 @@ struct PrivacyConsentDialog: View {
                     ViewThatFits(in: .horizontal) {
                         linkLine
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("1. 你可以查看")
+                            TaoziFont.text("1. 你可以查看", style: .footnote, weight: .bold)
                             HStack(spacing: 0) {
                                 agreementButton
-                                Text(" 和 ")
+                                TaoziFont.text(" 和 ", style: .footnote, weight: .bold)
                                 privacyButton
                             }
                         }
                     }
-                    Text("了解我们收集、使用、共享和存储信息的情况，以及对应的信息保护措施。")
+                    TaoziFont.text("了解我们收集、使用、共享和存储信息的情况，以及对应的信息保护措施。", style: .footnote, weight: .bold)
                 }
-                Text("2. 摄像头、麦克风、电话、位置与相册权限均不会默认或强制开启。你可以拒绝授权，相关功能可能受到影响，但不影响其他功能使用。")
-                Text("3. 在使用服务过程中，我们可能根据功能需要收集设备信息、操作日志、观看记录与任务完成状态，用于保障服务安全和提供内容推荐。")
+                TaoziFont.text("2. 摄像头、麦克风、电话、位置与相册权限均不会默认或强制开启。你可以拒绝授权，相关功能可能受到影响，但不影响其他功能使用。", style: .footnote, weight: .bold)
+                TaoziFont.text("3. 在使用服务过程中，我们可能根据功能需要收集设备信息、操作日志、观看记录与任务完成状态，用于保障服务安全和提供内容推荐。", style: .footnote, weight: .bold)
             }
-            .font(.footnote.weight(.bold))
             .foregroundStyle(Color.consentInk)
             .lineSpacing(3)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -119,29 +114,31 @@ struct PrivacyConsentDialog: View {
 
     private var linkLine: some View {
         HStack(spacing: 0) {
-            Text("1. 你可以查看 ")
+            TaoziFont.text("1. 你可以查看 ", style: .footnote, weight: .bold)
             agreementButton
-            Text(" 和 ")
+            TaoziFont.text(" 和 ", style: .footnote, weight: .bold)
             privacyButton
         }
         .lineLimit(1)
     }
 
     private var agreementButton: some View {
-        Button("《用户协议》") {
+        Button {
             onOpen(.userAgreement)
+        } label: {
+            TaoziFont.text("《用户协议》", style: .footnote, weight: .bold)
         }
         .buttonStyle(.plain)
-        .font(.footnote.weight(.bold))
         .foregroundStyle(Color.accentColor)
     }
 
     private var privacyButton: some View {
-        Button("《隐私政策》") {
+        Button {
             onOpen(.privacyPolicy)
+        } label: {
+            TaoziFont.text("《隐私政策》", style: .footnote, weight: .bold)
         }
         .buttonStyle(.plain)
-        .font(.footnote.weight(.bold))
         .foregroundStyle(Color.accentColor)
     }
 }

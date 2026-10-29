@@ -19,8 +19,7 @@ struct LegalDocumentView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Text("\(document.title)暂时无法加载")
-                .font(.body.weight(.semibold))
+            TaoziFont.text("\(document.title)暂时无法加载", style: .body, weight: .semibold)
                 .multilineTextAlignment(.center)
             Button("重新加载", action: {})
                 .buttonStyle(.borderedProminent)

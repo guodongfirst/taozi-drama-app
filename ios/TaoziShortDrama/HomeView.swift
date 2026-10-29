@@ -90,25 +90,23 @@ struct HomeView: View {
                         Button {
                             categoryID = category.id
                         } label: {
-                            VStack(spacing: 4) {
-                                Text(category.name)
-                                    .font(.subheadline.weight(.bold))
+                            VStack(spacing: 6) {
+                                TaoziFont.text(category.name, size: 18, weight: .heavy)
                                     .foregroundStyle(category.id == categoryID ? Color.homeInk : Color.homeStone)
                                     .lineLimit(1)
                                     .fixedSize(horizontal: true, vertical: false)
                                 Capsule()
                                     .fill(category.id == categoryID ? Color.accentColor : Color.clear)
-                                    .frame(width: 22, height: 3)
+                                    .frame(width: 26, height: 4)
                             }
                             .padding(.horizontal, 8)
-                            .frame(minWidth: 58)
                         }
                         .buttonStyle(.plain)
                         .id(category.id)
                     }
                 }
-                .padding(.horizontal, 10)
-                .padding(.top, 8)
+                .padding(.horizontal, 22)
+                .padding(.top, 10)
             }
             .onChange(of: categoryID) { _, newID in
                 alignCategory(newID, proxy: proxy)
@@ -138,8 +136,7 @@ struct HomeView: View {
                     Button {
                         selectedTags[categoryID] = tag
                     } label: {
-                        Text(tag)
-                            .font(.caption.weight(.bold))
+                        TaoziFont.text(tag, style: .caption, weight: .bold)
                             .foregroundStyle(tag == selectedTag ? Color.accentColor : Color.homeStone)
                             .padding(.horizontal, 12)
                             .frame(height: 28)
@@ -216,8 +213,8 @@ struct HomeView: View {
                         .aspectRatio(109 / 145, contentMode: .fit)
                     RoundedRectangle(cornerRadius: 2)
                         .fill(Color.homeChipOff)
+                        .frame(maxWidth: .infinity)
                         .frame(height: 13)
-                        .padding(.trailing, 18)
                 }
             }
         }
@@ -227,28 +224,28 @@ struct HomeView: View {
     @ViewBuilder
     private var footer: some View {
         if pageFailed {
-            Button("重试") {
+            Button {
                 Task { await loadMore() }
+            } label: {
+                TaoziFont.text("重试", style: .footnote, weight: .bold)
             }
-            .font(.footnote.weight(.bold))
             .foregroundStyle(Color.homeStone)
         } else if loadingMore {
             ProgressView()
         } else if hasMore[feedKey] == false {
-            Text("已加载完成")
-                .font(.caption.weight(.bold))
+            TaoziFont.text("已加载完成", style: .caption, weight: .bold)
                 .foregroundStyle(Color.homeStone)
         }
     }
 
     private func failure(message: String, retry: @escaping () -> Void) -> some View {
         VStack(spacing: 12) {
-            Text(message)
-                .font(.subheadline.weight(.bold))
+            TaoziFont.text(message, style: .subheadline, weight: .bold)
                 .foregroundStyle(Color.homeStone)
-            Button("重试", action: retry)
-                .font(.subheadline.weight(.bold))
-                .foregroundStyle(Color.accentColor)
+            Button(action: retry) {
+                TaoziFont.text("重试", style: .subheadline, weight: .bold)
+            }
+            .foregroundStyle(Color.accentColor)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -352,8 +349,7 @@ private struct DramaCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             cover
-            Text(drama.title)
-                .font(.footnote.weight(.bold))
+            TaoziFont.text(drama.title, style: .footnote, weight: .bold)
                 .foregroundStyle(Color.homeInk)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -369,8 +365,7 @@ private struct DramaCard: View {
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .overlay(alignment: .topTrailing) {
                 if let corner = watched ? DramaCorner(title: "看过", tone: .neutral) : drama.corner {
-                    Text(corner.title)
-                        .font(.system(size: 9, weight: .bold))
+                    TaoziFont.text(corner.title, size: 9, weight: .bold)
                         .foregroundStyle(.white)
                         .frame(width: 34, height: 18)
                         .background(cornerColor(corner.tone), in: UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 7, bottomTrailingRadius: 0, topTrailingRadius: 7))
@@ -378,8 +373,7 @@ private struct DramaCard: View {
             }
             .overlay(alignment: .bottomTrailing) {
                 if let count = drama.episodeCount, count > 0 {
-                    Text("\(count)集")
-                        .font(.system(size: 9, weight: .bold))
+                    TaoziFont.text("\(count)集", size: 9, weight: .bold)
                         .foregroundStyle(.white)
                         .padding(.horizontal, 6)
                         .frame(height: 20)
@@ -412,6 +406,7 @@ private enum DramaCoverStore {
 private struct DramaCoverImage: View {
     let url: URL?
     @State private var image: UIImage?
+    @State private var loading = false
 
     var body: some View {
         Color.homeChipOff
@@ -420,6 +415,8 @@ private struct DramaCoverImage: View {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()
+                } else if loading {
+                    ProgressView()
                 }
             }
             .task(id: url) {
@@ -428,18 +425,28 @@ private struct DramaCoverImage: View {
     }
 
     private func load() async {
+        image = nil
+        loading = false
         guard let url else { return }
         if let cached = DramaCoverStore.images[url] {
             image = cached
             return
         }
+        loading = true
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            guard !Task.isCancelled, let loaded = UIImage(data: data) else { return }
+            guard !Task.isCancelled else { return }
+            guard let loaded = UIImage(data: data) else {
+                loading = false
+                return
+            }
             DramaCoverStore.images[url] = loaded
             image = loaded
+            loading = false
         } catch {
-            return
+            if !Task.isCancelled {
+                loading = false
+            }
         }
     }
 }
@@ -459,25 +466,18 @@ private struct ContinueWatchingBar: View {
             HStack(alignment: .top, spacing: 12) {
                 cover
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(item.title)
-                        .font(.system(size: 14, weight: .bold))
+                    TaoziFont.text(item.title, size: 14, weight: .bold)
                         .foregroundStyle(Color.mineInk)
                         .lineLimit(1)
                         .frame(height: 19, alignment: .leading)
-                    (Text("上次看到第 ")
-                        .font(.system(size: 10.5, weight: .bold))
-                    + Text("\(item.episode)")
-                        .font(.system(size: 10.5, weight: .semibold).width(.condensed))
-                    + Text(" 集")
-                        .font(.system(size: 10.5, weight: .bold)))
+                    TaoziFont.text("上次看到第 \(item.episode) 集", size: 10.5, weight: .bold)
                         .foregroundStyle(Color.homeContinueStone)
                         .lineLimit(1)
                         .frame(height: 15, alignment: .leading)
                 }
                 .padding(.top, 10)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                Text("继续观看")
-                    .font(.system(size: 11.5, weight: .bold))
+                TaoziFont.text("继续观看", size: 11.5, weight: .bold)
                     .foregroundStyle(.white)
                     .frame(width: 84, height: 36)
                     .background(Color.homeTabOn, in: RoundedRectangle(cornerRadius: 11))
