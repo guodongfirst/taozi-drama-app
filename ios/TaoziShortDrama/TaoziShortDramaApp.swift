@@ -4,7 +4,8 @@ import SwiftUI
 struct TaoziShortDramaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LaunchView()
+                .preferredColorScheme(.light)
         }
     }
 }
