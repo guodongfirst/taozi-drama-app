@@ -6,6 +6,7 @@ final class PangleDramaCatalog: DramaCatalog {
 
     private let pageSize = 20
     private var models: [Int64: DJXPlayletInfoModel] = [:]
+    private var fullLists: [String: [DramaSummary]] = [:]
 
     func categories() async throws -> [DramaCategory] {
         try await ready()
@@ -16,10 +17,27 @@ final class PangleDramaCatalog: DramaCatalog {
     func dramas(categoryID: String, tag: String?, page: Int) async throws -> DramaPage {
         try await ready()
         let query = (tag?.isEmpty == false && tag != "全部") ? tag! : categoryID
-        if categoryID == DramaFeed.recommendID && query == DramaFeed.recommendID {
-            return try await recommended(page: page)
+        let key = "\(categoryID)|\(query)"
+        if page > 1, let cached = fullLists[key] {
+            return Self.slice(cached, page: page, pageSize: pageSize)
         }
-        return try await category(query, page: page)
+        let loaded: DramaPage
+        if categoryID == DramaFeed.recommendID && query == DramaFeed.recommendID {
+            loaded = try await recommended(page: page)
+        } else {
+            loaded = try await category(query, page: page)
+        }
+        if loaded.items.count > pageSize {
+            if page == 1 {
+                fullLists[key] = loaded.items
+                return Self.slice(loaded.items, page: 1, pageSize: pageSize)
+            }
+            return DramaPage(items: Array(loaded.items.prefix(pageSize)), hasMore: true)
+        }
+        if page == 1 {
+            fullLists[key] = nil
+        }
+        return loaded
     }
 
     func trackImpression(_ id: Int64) {
@@ -124,6 +142,13 @@ final class PangleDramaCatalog: DramaCatalog {
                 categoryID: categoryID
             )
         }
+    }
+
+    private static func slice(_ items: [DramaSummary], page: Int, pageSize: Int) -> DramaPage {
+        let start = max(page - 1, 0) * pageSize
+        guard start < items.count else { return DramaPage(items: [], hasMore: false) }
+        let end = min(start + pageSize, items.count)
+        return DramaPage(items: Array(items[start..<end]), hasMore: end < items.count)
     }
 
     private static func hasMore(info: [String: NSObject]?, count: Int, pageSize: Int) -> Bool {

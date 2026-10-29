@@ -175,9 +175,6 @@ struct HomeView: View {
                         .id(item.id)
                         .onAppear {
                             catalog.trackImpression(item.id)
-                            if item.id == items.last?.id {
-                                Task { await loadMore() }
-                            }
                         }
                     }
                 }
@@ -185,6 +182,14 @@ struct HomeView: View {
                 footer
                     .padding(.top, 16)
                     .padding(.bottom, continueEntry == nil ? 12 : 98)
+            }
+            .onScrollGeometryChange(for: Bool.self) { geo in
+                let content = geo.contentSize.height
+                guard geo.contentOffset.y > 24, content > geo.containerSize.height + 1 else { return false }
+                return geo.visibleRect.maxY >= content - 160
+            } action: { _, nearBottom in
+                guard nearBottom, hasMore[feedKey] == true, !loadingMore, !loading else { return }
+                Task { await loadMore() }
             }
             .id(feedKey)
             .scrollPosition(id: anchorBinding, anchor: .top)
