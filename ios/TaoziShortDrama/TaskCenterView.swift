@@ -95,7 +95,7 @@ struct TaskCenterView: View {
                 .padding(.top, 10)
 
             taskRow(title: "看剧得奖励", coins: 146420, button: "去看剧", active: true, action: onWatchDrama) {
-                TaoziFont.text("今日已观看：0集", size: 10, weight: .bold)
+                watchedTodayText
             }
             .padding(.top, 14)
 
@@ -131,7 +131,7 @@ struct TaskCenterView: View {
         HStack(spacing: 9) {
             ForEach(watchRewardItems) { reward in
                 VStack(spacing: 4) {
-                    VStack(spacing: 2) {
+                    VStack(spacing: 10) {
                         Image("task-coin")
                             .resizable()
                             .frame(width: 20, height: 20)
@@ -191,6 +191,8 @@ struct TaskCenterView: View {
                             .accessibilityHidden(true)
                         TaoziFont.text("\(coins)", style: .footnote, weight: .semibold)
                             .foregroundStyle(Color.taskAccent)
+                            // DIN Condensed 字面偏上，下移后与金币图标垂直居中。
+                            .offset(y: 1.5)
                     }
                 }
                 Spacer(minLength: 8)
@@ -214,6 +216,18 @@ struct TaskCenterView: View {
         } else {
             label
         }
+    }
+
+    private var watchedTodayText: Text {
+        var prefix = AttributedString("今日已观看：")
+        prefix.font = .system(size: 10, weight: .bold)
+        var count = AttributedString("0")
+        count.font = .custom("DINCondensed-Bold", size: 10)
+        // 数字和汉字分成两段字体后，SwiftUI 会在「0」和「集」之间多出空隙。
+        count.kern = -5
+        var unit = AttributedString("集")
+        unit.font = .system(size: 10, weight: .bold)
+        return Text(prefix + count + unit)
     }
 
     private var taskDivider: some View {
