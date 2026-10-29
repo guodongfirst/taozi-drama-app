@@ -463,7 +463,7 @@ private struct ContinueWatchingBar: View {
             episode: item.resumeEpisode,
             startTime: item.resumeTime
         )) {
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .center, spacing: 12) {
                 cover
                 VStack(alignment: .leading, spacing: 0) {
                     TaoziFont.text(item.title, size: 14, weight: .bold)
@@ -475,18 +475,15 @@ private struct ContinueWatchingBar: View {
                         .lineLimit(1)
                         .frame(height: 15, alignment: .leading)
                 }
-                .padding(.top, 10)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 TaoziFont.text("继续观看", size: 11.5, weight: .bold)
                     .foregroundStyle(.white)
                     .frame(width: 84, height: 36)
                     .background(Color.homeTabOn, in: RoundedRectangle(cornerRadius: 11))
-                    .padding(.top, 11)
             }
             .padding(.leading, 10)
-            .padding(.trailing, 16)
-            .padding(.top, 10)
-            .frame(maxWidth: .infinity, alignment: .top)
+            .padding(.trailing, 28)
+            .frame(maxWidth: .infinity)
             .frame(height: 78)
             .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
         }
@@ -500,6 +497,8 @@ private struct ContinueWatchingBar: View {
                     .accessibilityHidden(true)
             }
             .buttonStyle(.plain)
+            .padding(.top, 6)
+            .padding(.trailing, 6)
             .accessibilityLabel("关闭")
         }
         .accessibilityLabel("继续观看\(item.title)，上次看到第\(item.episode)集")
