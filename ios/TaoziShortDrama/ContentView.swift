@@ -19,7 +19,7 @@ struct ContentView: View {
                     if tab == .task {
                         TaskCenterView(onWatchDrama: { tab = .drama })
                     } else if tab == .mine {
-                        MainTabPlaceholder(title: "我的")
+                        MineView()
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -34,18 +34,6 @@ struct ContentView: View {
             }
         }
         .preferredColorScheme(.light)
-    }
-}
-
-private struct MainTabPlaceholder: View {
-    let title: String
-
-    var body: some View {
-        Text(title)
-            .font(.title3.weight(.bold))
-            .foregroundStyle(Color.homeInk)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.homeBackground)
     }
 }
 
@@ -77,6 +65,15 @@ private struct MainTabBar: View {
                 Image(selected ? "\(image)-selected" : image)
                     .resizable()
                     .frame(width: 22, height: 22)
+                    .overlay(alignment: .topTrailing) {
+                        if value == .mine {
+                            Image("mine-notice")
+                                .resizable()
+                                .frame(width: 8, height: 8)
+                                .offset(x: 3.5, y: -5)
+                                .accessibilityHidden(true)
+                        }
+                    }
                 Text(title)
                     .font(.caption2.weight(.bold))
                     .foregroundStyle(selected ? Color.homeTabOn : Color.homeTab)

@@ -16,4 +16,9 @@ extension Color {
     static let taskAccent = Color(red: 255 / 255, green: 74 / 255, blue: 69 / 255)
     static let taskAction = Color(red: 255 / 255, green: 232 / 255, blue: 232 / 255)
     static let taskTrack = Color(red: 242 / 255, green: 219 / 255, blue: 214 / 255)
+    static let mineInk = Color(red: 41 / 255, green: 31 / 255, blue: 28 / 255)
+    static let mineStone = Color(red: 138 / 255, green: 122 / 255, blue: 117 / 255)
+    static let minePeach = Color(red: 255 / 255, green: 199 / 255, blue: 173 / 255)
+    static let mineBlush = Color(red: 255 / 255, green: 227 / 255, blue: 212 / 255)
+    static let mineCream = Color(red: 255 / 255, green: 251 / 255, blue: 248 / 255)
 }
