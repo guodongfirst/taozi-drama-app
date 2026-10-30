@@ -45,7 +45,7 @@ struct TaskCenterView: View {
                 }
             }
             .overlay(alignment: .bottomTrailing) {
-                Button(action: {}) {
+                NavigationLink(value: WithdrawRoute.page) {
                     TaoziFont.text("提现", style: .caption, weight: .bold)
                         .foregroundStyle(.white)
                         .frame(width: 58, height: 32)

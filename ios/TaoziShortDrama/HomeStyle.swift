@@ -23,4 +23,10 @@ extension Color {
     static let minePeach = Color(red: 255 / 255, green: 199 / 255, blue: 173 / 255)
     static let mineBlush = Color(red: 255 / 255, green: 227 / 255, blue: 212 / 255)
     static let mineCream = Color(red: 255 / 255, green: 251 / 255, blue: 248 / 255)
+    static let withdrawInk = Color(red: 36 / 255, green: 28 / 255, blue: 26 / 255)
+    static let withdrawStone = Color(red: 140 / 255, green: 133 / 255, blue: 128 / 255)
+    static let withdrawTier = Color(red: 247 / 255, green: 246 / 255, blue: 245 / 255)
+    static let withdrawTierFoot = Color(red: 235 / 255, green: 232 / 255, blue: 229 / 255)
+    static let withdrawSelected = Color(red: 255 / 255, green: 245 / 255, blue: 245 / 255)
+    static let withdrawGreen = Color(red: 20 / 255, green: 184 / 255, blue: 92 / 255)
 }

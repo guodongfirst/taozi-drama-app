@@ -34,6 +34,9 @@ struct ContentView: View {
                     .ignoresSafeArea()
                     .onDisappear { homeRefresh += 1 }
             }
+            .navigationDestination(for: WithdrawRoute.self) { _ in
+                WithdrawView()
+            }
         }
         .preferredColorScheme(.light)
     }
